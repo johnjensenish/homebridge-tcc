@@ -40,7 +40,8 @@
         "required": false,
         "description": "Storage of chart graphing data for history graphing, either fs or googleDrive, defaults to fs.",
         "default": "fs",
-        "oneOf": [{
+        "oneOf": [
+          {
             "title": "File System",
             "enum": ["fs"]
           },
@@ -55,6 +56,27 @@
         "type": "boolean",
         "required": false,
         "description": "If set to true, temperature changes will be set as permanent holds, rather than temporary holds. This will allow you to use HomeKit automations to completely replace your thermostat's schedule. If set to false, the temperature changes will expire after a certain period of time and resume your normal schedule. By default, this is off."
+      },
+      "sensors": {
+        "title": "Sensors",
+        "type": "string",
+        "required": false,
+        "description": "Add temperature and humidity HomeKit sensors, if available. These sensors are useful for automations.",
+        "default": "none",
+        "oneOf": [
+          {
+            "title": "All available temperature and humidity sensors",
+            "enum": ["all"]
+          },
+          {
+            "title": "Indoor temperature and humidity sensors for each thermostat",
+            "enum": ["inside"]
+          },
+          {
+            "title": "Outdoor temperature and humidity sensors",
+            "enum": ["outside"]
+          }
+        ]
       },
       "debug": {
         "title": "Debug Logging",
@@ -79,8 +101,9 @@
       "expanded": false,
       "items": [
         "refresh",
-        "storage",
         "usePermanentHolds",
+        "sensors",
+        "storage",
         "debug"
       ]
     }
